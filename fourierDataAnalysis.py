@@ -44,9 +44,15 @@ print("Data loaded successfully")
 # CLEAN PPG SIGNAL
 # =========================
 
-for col in ["PPG_IR", "PPG_Green", "PPG_Blue"]:
-    s1[col] = s1[col] - s1[col].mean()
-    s2[col] = s2[col] - s2[col].mean()
+# for col in ["PPG_IR", "PPG_Green", "PPG_Blue"]:
+#     print("s1 before correction:", s1[col])
+#     print("s2 before correction:", s2[col])
+#     print("s1[col] mean =", s1[col].mean())
+#     print("s2[col] mean =", s2[col].mean())
+#     s1[col] = s1[col] - s1[col].mean()
+#     s2[col] = s2[col] - s2[col].mean()
+#     print("s1 after correction:", s1[col])
+#     print("s2 after correction:", s2[col])
 
 # =========================
 # TIME AXIS
@@ -104,7 +110,12 @@ class FourierAnalyzer:
         return freqs, magnitude
 
     def meanCorrect(self, signal):
-        return signal - np.mean(signal)
+        # print("Mean before correction:", np.mean(signal))
+        # print(signal)
+        signalAfterCorrection = signal - np.mean(signal)
+        # print("Mean after correction:", np.mean(signalAfterCorrection))
+        # print("List after correction:", signalAfterCorrection)
+        return signalAfterCorrection
 
     def plotFFT(self, signal, title, maxFreq=20):
         # Raw FFT
