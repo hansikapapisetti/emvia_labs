@@ -57,23 +57,32 @@ if __name__ == "__main__":
 
     # RAW GitHub file link (must be raw version)
     url = "https://raw.githubusercontent.com/ludvikalkhoury/DWL-Method/main/wrist-dataset/Subject%201/R_Peak_Sub_1.txt"
+    url2 = "https://raw.githubusercontent.com/ludvikalkhoury/DWL-Method/main/wrist-dataset/Subject%202/R_Peak_Sub_2.txt"
 
     # print("Step 1: Downloading R-peak data from Github")
 
     r_peaks = load_rpeaks_from_github(url)
+    r_peaks2 = load_rpeaks_from_github(url2)
 
     # print(f"Step 2: Loaded {len(r_peaks)} R-peaks")
 
     rr_intervals = compute_rr_intervals(r_peaks, fs=100)
+    rr_intervals2 = compute_rr_intervals(r_peaks2, fs=100)
+
 
     # print(f"Step 3: Computed {len(rr_intervals)} RR intervals")
 
     calc = HRVCalculator(rr_intervals)
+    calc2 = HRVCalculator(rr_intervals2)
 
-    print("\n===== HRV RESULTS =====")
+    print("\n===== HRV RESULTS for Subject 1 =====")
     print("SDNN:", round(calc.sdnn(), 2), "ms")
     print("RMSSD:", round(calc.rmssd(), 2), "ms")
     print("pNN50:", round(calc.pnn50(), 2), "%")
+    print("\n===== HRV RESULTS for Subject 2 =====")
+    print("SDNN:", round(calc2.sdnn(), 2), "ms")
+    print("RMSSD:", round(calc2.rmssd(), 2), "ms")
+    print("pNN50:", round(calc2.pnn50(), 2), "%")
 
 #===== HRV RESULTS for Subject 1 =====
 #SDNN: 73.9 ms
